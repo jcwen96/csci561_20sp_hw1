@@ -61,6 +61,9 @@ public class homework {
         HashMap<Node, Integer> map = new HashMap<>();
         map.put(initial, initial.currentCost);
 
+        Node test = new Node(1242, 246, 289);
+        int count = 0;
+
 //        while (!map.isEmpty()) {
         while (!frontier.isEmpty()) {
             Node current = frontier.poll();
@@ -72,13 +75,27 @@ public class homework {
 
             for (Node new_node : current.expand(algoType)) {
 
+//                if (current.equals(test)) {
+//                    count++;
+//                    System.out.println("I am here!!! Here is test: " + test);
+//                    System.out.println("I am here!!! Here is current" + current);
+//                    System.out.println(count);
+//                }
+
                 if (map.containsKey(new_node)) {
 
                     if (map.get(new_node) > new_node.currentCost) {
                         map.put(new_node, new_node.currentCost);
                         frontier.remove(new_node);
+
+                        if (new_node.equals(test)) {
+                            System.out.println(frontier.contains(new_node));
+                        }
+
+
                         frontier.add(new_node);
                     }
+                    // slower version
 //                    for (Node n : frontier) {
 //                        if (n.equals(new_node) && n.currentCost > new_node.currentCost) {
 //

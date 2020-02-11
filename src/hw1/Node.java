@@ -10,7 +10,7 @@ class Node implements Comparable<Node> {
     protected int year;
     protected int x;
     protected int y;
-    protected String field;
+    protected String fingerPrint;
     protected int currentCost;
     protected int futureCost;
     protected Node parent;
@@ -19,7 +19,7 @@ class Node implements Comparable<Node> {
         this.year = year;
         this.x = x;
         this.y = y;
-        field = year + ";" + x + ";" + y;
+        fingerPrint = year + ";" + x + ";" + y;
     }
 
     public Node(int year, int x, int y, int currentCost, Node parent) {
@@ -37,19 +37,19 @@ class Node implements Comparable<Node> {
         if (this == obj) return true;
         if (obj == null || this == null) return false;
         if (!(obj instanceof Node)) return false;
-        return this.field.equals(((Node) obj).field);
+        return this.fingerPrint.equals(((Node) obj).fingerPrint);
 //        return this.year == ((Node) obj).year && this.x == ((Node) obj).x && this.y == ((Node) obj).y;
     }
 
     public String toString() {
-        return "Node: [year: " + year + ", x: " + x + ", y: " + y + ", currentCost: " + currentCost + ", futureCost: " + futureCost + "]";
+        return "Node: [year, x, y: " + fingerPrint + ", currentCost: " + currentCost + ", futureCost: " + futureCost + "]";
     }
 
     public int hashCode() {
 //        int result = this.year;
 //        result = result * 31 + this.x;
 //        result = result * 31 + this.y;
-        return field.hashCode();
+        return fingerPrint.hashCode();
     }
 
     public int compareTo(Node n) {
