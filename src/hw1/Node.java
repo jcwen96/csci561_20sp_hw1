@@ -35,22 +35,19 @@ class Node implements Comparable<Node> {
 
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (obj == null || this == null) return false;
+        if (obj == null) return false;
         if (!(obj instanceof Node)) return false;
         return this.fingerPrint.equals(((Node) obj).fingerPrint);
-//        return this.year == ((Node) obj).year && this.x == ((Node) obj).x && this.y == ((Node) obj).y;
     }
 
     public String toString() {
-        return "Node: [year, x, y: " + fingerPrint + ", currentCost: " + currentCost + ", futureCost: " + futureCost + "]";
+        return "Node: [year, x, y: " + fingerPrint + "; currentCost: " + currentCost + ", futureCost: " + futureCost + "]";
     }
 
     public int hashCode() {
-//        int result = this.year;
-//        result = result * 31 + this.x;
-//        result = result * 31 + this.y;
         return fingerPrint.hashCode();
     }
+
 
     public int compareTo(Node n) {
         return (this.currentCost + this.futureCost) - (n.currentCost + n.futureCost);
