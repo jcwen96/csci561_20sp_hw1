@@ -1,7 +1,3 @@
-package hw1;
-
-import java.util.Random;
-
 public class ChannelType {
     int year1;
     int year2;
@@ -15,18 +11,10 @@ public class ChannelType {
         this.year2 = year2;
     }
 
-    public ChannelType(Random r, int w, int h) {
-        this.year1 = r.nextInt(Integer.MAX_VALUE);
-        this.x = r.nextInt(w);
-        this.y = r.nextInt(h);
-        this.year2 = r.nextInt(Integer.MAX_VALUE);
-    }
-
     public boolean canJaunt(Node n) {
         if (this.x != n.x) return false;
         if (this.y != n.y) return false;
-        if (this.year1 != n.year && this.year2 != n.year) return false;
-        return true;
+        return this.year1 == n.year || this.year2 == n.year;
     }
 
     public Integer jaunt(Node start) {

@@ -1,5 +1,3 @@
-package hw1;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -24,9 +22,6 @@ public class homework {
         try (Scanner in = new Scanner(new File("input.txt"))) {
             initialState(in);
             writeSolution(search(), new PrintStream(new File("output.txt")));
-            // writeSolution(search(), System.out);
-            System.out.println(frontier.size());
-            System.out.println(visited.size());
         } catch (FileNotFoundException e) {
             System.err.println("Warning: File \"input.txt\" does not exist!");
             System.err.println("The program exit.");
@@ -66,13 +61,11 @@ public class homework {
         HashMap<Node, Integer> frontierCost = new HashMap<>();
         frontierCost.put(initial, initial.currentCost);
 
-
         while (!frontier.isEmpty()) {
             Node current = frontier.poll();
             frontierCost.remove(current);
 
             if (current.equals(goal)) return current;
-
             visited.add(current);
 
             for (Node new_node : current.expand(algoType)) {
@@ -109,11 +102,11 @@ public class homework {
         int preCost = 0;
         for (int i = solution.size() - 1; i > 0; i--) {
             cur = solution.get(i);
-            out.println(cur.year + " " + cur.x + " " + cur.y + " " + (cur.currentCost - preCost));
+            out.println(cur.fingerPrint + " " + (cur.currentCost - preCost));
             preCost = cur.currentCost;
         }
         cur = solution.get(0);
-        out.print(cur.year + " " + cur.x + " " + cur.y + " " + (cur.currentCost - preCost));
+        out.print(cur.fingerPrint + " " + (cur.currentCost - preCost));
         return true;
     }
 }

@@ -1,5 +1,3 @@
-package hw1;
-
 import java.util.ArrayList;
 
 class Node implements Comparable<Node> {
@@ -19,7 +17,7 @@ class Node implements Comparable<Node> {
         this.year = year;
         this.x = x;
         this.y = y;
-        fingerPrint = year + ";" + x + ";" + y;
+        fingerPrint = year + " " + x + " " + y;
     }
 
     public Node(int year, int x, int y, int currentCost, Node parent) {
@@ -41,7 +39,7 @@ class Node implements Comparable<Node> {
     }
 
     public String toString() {
-        return "Node: [year, x, y: " + fingerPrint + "; currentCost: " + currentCost + ", futureCost: " + futureCost + "]";
+        return "Node: [year x y: " + fingerPrint + ", currentCost: " + currentCost + ", futureCost: " + futureCost + "]";
     }
 
     public int hashCode() {
