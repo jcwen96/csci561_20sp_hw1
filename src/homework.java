@@ -22,6 +22,8 @@ public class homework {
         try (Scanner in = new Scanner(new File("input.txt"))) {
             initialState(in);
             writeSolution(search(), new PrintStream(new File("output.txt")));
+            System.err.println(frontier.size());
+            System.err.println(visited.size());
         } catch (FileNotFoundException e) {
             System.err.println("Warning: File \"input.txt\" does not exist!");
             System.err.println("The program exit.");
@@ -68,19 +70,21 @@ public class homework {
             if (current.equals(goal)) return current;
             visited.add(current);
 
-            for (Node new_node : current.expand(algoType)) {
-                if (frontierCost.containsKey(new_node)) {
+            for (Node child : current.expand(algoType)) {
+                if (frontierCost.containsKey(child)) {
                     if (algoType.equals("BFS")) continue;
-                    if (frontierCost.get(new_node) > new_node.currentCost) {
-                        frontierCost.put(new_node, new_node.currentCost);
-                        frontier.remove(new_node);
-                        frontier.add(new_node);
+                    if (frontierCost.get(child) > child.currentCost) {
+                        frontierCost.put(child, child.currentCost);
+                        frontier.remove(child);
+                        frontier.add(child);
                     }
                     continue;
                 }
-                if (visited.contains(new_node)) continue;
-                frontier.add(new_node);
-                frontierCost.put(new_node, new_node.currentCost);
+                // 注意此处，A*还是需要check已经visited的结点，若cost变小了，则应在visited中删掉，并放入frontier中
+                // 但本次作业中使用的是consistent的heuristic，所以直接continue也可
+                if (visited.contains(child)) continue;
+                frontier.add(child);
+                frontierCost.put(child, child.currentCost);
             }
         }
         return null;
